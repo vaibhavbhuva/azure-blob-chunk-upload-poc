@@ -1,4 +1,4 @@
-# Upload Large File in parallel to Azure Storage using Chunk Upload
+# Upload Large File to Azure Storage using Chunk Upload
 
 Example Screenshot :
 
