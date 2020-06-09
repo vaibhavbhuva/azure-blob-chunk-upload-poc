@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Large File in parallel to Azure Storage using Chunk Upload</title>
+    <meta name="description" content="Upload Large File in parallel to Azure Storage using Chunk Upload">
+    <meta name="author" content="Vaibhav Bhuva">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <header>
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+            <div class="container d-flex justify-content-between">
+                <a href="#" class="navbar-brand d-flex align-items-center">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg> -->
+                    <strong>Azure Blob Storage Chunk file Upload</strong>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-12 col-md-5 col-lg-6">
+                <div class="card">
+                    <h5 class="card-header">File Uploader</h5>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="sasUrl">SAS(Shared Access Signature) URI</label>
+                                <input type="text" class="form-control" id="sasUrl" aria-describedby="sasUrlHelp"
+                                    required placeholder="Enter SAS URL">
+                                <small id="sasUrlHelp" class="form-text text-muted">We'll never share your SAS URI with
+                                    anyone
+                                    else.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">File Browser</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="file" required>
+                                    <label class="custom-file-label" for="file">Choose file</label>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary mb-5" onclick="uploadFileInBlocks()">Upload
+                                File</button>
+                            <div id="output">
+                                <p>
+                                    <h5>File Properties</h5>
+                                    <div class="dropdown-divider"></div>
+                                    <strong class="text-secondary">Name:</strong> <span id="fileName"></span><br>
+                                    <strong class="text-secondary">File Size:</strong> <span id="fileSize"></span><br>
+                                    <strong class="text-secondary">File Type:</strong> <span id="fileType"></span><br>
+                                    <strong class="text-secondary">Progress:</strong> <span id="fileUploadProgress">0.00 %</span> <br>
+                                    <strong class="text-secondary">Estimated Time Remaining:</strong> <span id="fileUploadRemainingTime">Calculating....</span>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 col-md-7 col-lg-6">
+                <div class="card">
+                    <h5 class="card-header">File Preview</h5>
+                    <div class="card-body">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <video class="embed-responsive-item" id="finalVideo" controls></video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- / .row -->
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
