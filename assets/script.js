@@ -89,6 +89,7 @@ function fileUploadingTimeCalculation() {
   let timeElapsed = (new Date()) - timeStarted; // Assuming that timeStarted is a Date Object
   let uploadSpeed = Math.floor(bytesUploaded / (timeElapsed/1000)); // Upload speed in second
   let estimatedSecondsLeft = Math.round(((selectedFile.size - bytesUploaded) / uploadSpeed));
+  if(!estimatedSecondsLeft) { return; }
   // The only argument is the number of remaining seconds. 
   // fileUploadRemainingTimeEl.textContent = estimatedSecondsLeft + " Seconds";
   countdownTimer(estimatedSecondsLeft,'seconds');
